@@ -1,0 +1,50 @@
+﻿@model IEnumerable<IdentityRole>
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewBag.Title = "All Roles";
+    Layout = null;
+}
+
+
+@if (Model.Any())
+{
+    <a onclick="showInPopup('@Url.Action("CreateRole","administration",null,Context.Request.Scheme)','New Role')" class="btn btn-success text-white" style="width:130px"><i class="fas fa-random"></i>Add Role</a><br /><br />
+    foreach (var role in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Role Id : @role.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@role.Name</h5>
+            </div>
+              @if ((SignInManager.IsSignedIn(User) &&  ( User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))))
+                {
+            <div class="card-footer">
+                <button onclick="showInPopup('@Url.Action("EditRole","administration",new {id=role.Id},Context.Request.Scheme)','Edit')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</button>
+
+            </div>
+                }
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No roles created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a role
+            </h5>
+            @*<a class="btn btn-primary" style="width:auto"
+                   asp-controller="administration" asp-action="CreateRole">
+                    Create Role
+                </a>*@
+            <a onclick="showInPopup('@Url.Action("CreateRole","administration",null,Context.Request.Scheme)','New Role')" class="btn btn-success text-white"><i class="fas fa-random"></i>Add Role</a>
+
+        </div>
+    </div>
+}

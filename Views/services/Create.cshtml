@@ -1,0 +1,52 @@
+﻿@model AutoCare.Models.ViewModels.ServicesViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+<h1>Create</h1>
+
+
+<hr />
+
+        <form method="post" asp-action="Create" onsubmit="return jQueryAjaxPost(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+                <div class="form-group">
+                    <label asp-for="Details" class="control-label"></label>
+                    <input asp-for="Details" class="form-control" style="width:70%" />
+                    <span asp-validation-for="Details" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="price" class="control-label"></label>
+                    <input asp-for="price"  type="number" class="form-control"  style="width:70%"/>
+                    <span asp-validation-for="price" class="text-danger"></span>
+                </div>
+           
+            <div class="form-group">
+                <label asp-for="priceInPoints" class="control-label"></label>
+                <input asp-for="priceInPoints"  type="number" class="form-control"  style="width:70%" />
+                <span asp-validation-for="priceInPoints" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Earnedpoints" class="control-label"></label>
+                <input asp-for="Earnedpoints"  type="number" class="form-control"  style="width:70%"/>
+                <span asp-validation-for="Earnedpoints" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12 offset-md-3">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" style="width:40%" />
+                </div>
+            </div>
+        </form>
+ 
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

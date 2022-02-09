@@ -1,0 +1,13 @@
+﻿@model IEnumerable<AutoCare.Models.SpareParts>
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>SpareParts</h1>
+
+<div id="view-all"  style="padding:20px;">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<AutoCare.Models.services>
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Services</h1>
+
+<div id="view-all" style="padding:20px;">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>
+
+

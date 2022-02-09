@@ -1,0 +1,68 @@
+﻿@model AutoCare.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = null;
+}
+
+<h1>Details</h1>
+
+<div class="row col-sm-12">
+    <h4>Owners</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd class="col-sm-8">
+            <strong> @Html.DisplayFor(model => model.FirstName)</strong>
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>   @Html.DisplayFor(model => model.LastName)</strong>
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>  @Html.DisplayFor(model => model.Address)</strong>
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd class="col-sm-8">
+            <strong>    @Html.DisplayFor(model => model.Email)</strong>
+        </dd>
+
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>   @Html.DisplayFor(model => model.Phone)</strong>
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.NationalNumber)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>    @Html.DisplayFor(model => model.NationalNumber)</strong>
+        </dd>
+        @foreach (var car in Model.cars)
+        {
+        <dt class="col-sm-4">
+            CarNumbers
+        </dt>
+        <dd class="col-sm-8">
+            <strong>    @car.CarNumbers</strong>
+        </dd>
+        }
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

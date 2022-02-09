@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ApplicationUser>
+
+
+<table class="table table-striped" >
+    <thead class="thead-dark">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(x => x.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.NationalNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.AddedDate)
+            </th>
+
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddUser","Account",null,Context.Request.Scheme)','New User')" class="btn btn-success text-white"><i class="fas fa-random"></i>Add User</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NationalNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedDate)
+            </td>
+            <td>
+                <div class="row">
+                    <button onclick="showInPopup('@Url.Action("Details","Account",new {id=item.Id},Context.Request.Scheme)','Details')" class="btn btn-info text-white"><i class="fas fa-anchor"></i> Details</button>
+                    <a onclick="showInPopup('@Url.Action("Edit","Account",new {id=item.Id},Context.Request.Scheme)','Update User')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" class="d-inline">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

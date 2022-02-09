@@ -1,0 +1,123 @@
+﻿@model CheckUpSpareServicesViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+}
+
+<h1 style="padding:20px;">Create</h1>
+
+<div class="row" style="padding:20px;">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container">
+                <div class="row">
+                <div class="col-xs-6"  style="padding-right:20px;">  
+                    <label>Car Numbers</label>
+            <select asp-for="CarId" class="form-control" asp-items="@(new SelectList(ViewBag.cars,"ID","CarNumbers"))" style="padding-right:10px;">
+                <option selected disabled>--Choose car please--</option>
+            </select>
+                 </div>
+
+                <div class="col-xs-6">   
+                    <label>Car Counter</label>
+                    <input asp-for="Counter" class="form-control" style="width:200%"/>
+                <span asp-validation-for="Counter" class="text-danger"></span>
+                 </div>
+                 </div>
+            </div>
+            <br />
+            <div class="container">
+                <div class="row">
+                <div class="col-xs-6 table-responsive" >
+            
+            <table class="table table-hover">
+                 <thead class="thead-dark">
+                    <th>Spare Parts</th>
+                    <th>Price</th>
+                    <th>Check</th>
+                    <th>Quantity</th>
+                 </thead>
+                <tbody>
+                    @for (int i=0;i<Model.SpareParts.Capacity;i++)
+                    {
+                        <tr>
+                            <td>
+                               @Html.HiddenFor(x=>Model.SpareParts[i].ID)
+                               @Html.DisplayFor(it=>Model.SpareParts[i].Details)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(it=>Model.SpareParts[i].Price)
+                            </td>
+                            <td>
+                                @*<input type="checkbox" asp-for="SpareParts[i].IsChecked" id="mycheck" />*@
+                               @Html.CheckBoxFor(it=>Model.SpareParts[i].IsChecked,new {style = " Vertical-Align:3px}"})
+                            </td>
+                            <td>
+                            <input asp-for="@Model.SpareParts[i].Quantity" class="form-control" type="number" style="width:80px"/>
+                            </td>
+                        </tr>
+                    }
+                                
+                    </tbody>
+                </table>
+                </div>
+            
+                 <div class="col-xs-6 table-responsive" >
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                    <th>Services</th>
+                    <th>Price</th>
+                    <th>priceInPoints</th>
+                    <th>Earnedpoints</th>
+                    <th></th>
+                    </thead>
+                <tbody>
+                    @for (int i=0;i<Model.Services.Capacity;i++)
+                    {
+                        <tr>
+                            <td>
+                               @Html.HiddenFor(x=>Model.Services[i].Id)
+                               @Html.DisplayFor(it=>Model.Services[i].Details)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(it=>Model.Services[i].price)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(it=>Model.Services[i].priceInPoints)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(it=>Model.Services[i].Earnedpoints)
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(it=>Model.Services[i].IsChecked,new {style = " Vertical-Align:3px}"})
+                            </td>
+                        </tr>
+                    }
+                                
+                    </tbody>
+                </table>
+                </div>
+                </div> 
+                </div>
+            <div class="form-group d-flex justify-content-center">
+                
+                <input type="submit" value="Create" class="btn btn-primary"  style="margin:20px;"/>
+                <a asp-action="Index" class="btn btn-primary"  style="margin:20px;">Back to List</a>
+                
+            </div>
+        </form>
+        <div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

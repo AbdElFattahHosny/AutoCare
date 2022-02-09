@@ -1,0 +1,66 @@
+﻿@model CarCreateViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+    
+}
+
+
+
+<div class="row">  
+    <div class="col-md-4">
+        <form method="post" asp-action="Create" asp-controller="Cars" onsubmit="return jQueryAjaxPost(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewBag.numbers != null)
+            {
+                <label> Number already exists  </label>
+            }
+            <div class="form-group">
+                <label asp-for="CarNumbers" class="control-label"></label>
+                <input asp-for="CarNumbers" class="form-control" style="width:200%" />
+                <span asp-validation-for="CarNumbers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" style="width:200%" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" style="width:200%" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            @if ((SignInManager.IsSignedIn(User) && !User.IsInRole("User")))
+            {
+                <div class="form-group">
+                    <label asp-for="ownerId" class="control-label"></label>
+                
+                <select asp-for="ownerId" class=" mdb-select md-form form-control" asp-items="@(new SelectList(Model.owners,"Id","NationalNumber"))" style="width:200%"  searchable="Search here..">
+                   <datalist>
+                    <option selected disabled>--Choose Owner please--</option>
+                    </datalist>
+                </select>
+                
+                <span asp-validation-for="ownerId" class="text-danger"></span>
+            </div>
+            }
+            <div class="form-group">
+                <div class="col-md-12 offset-md-3">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+
+
+@section Scripts {
+    
+    <script>
+    $(document).ready(function() {
+    $('.mdb-select').materialSelect();
+     });
+</script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

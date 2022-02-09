@@ -1,0 +1,284 @@
+﻿@model RegisterViewModel
+@*@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);*@
+
+@{
+    ViewBag.Title = "User Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    *:focus {
+        outline: none;
+    }
+
+    #bod {
+        margin: 0;
+        padding: 0;
+        /*background: #DDD;*/
+        font-size: 16px;
+        color: #222;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+    }
+
+    #login-box {
+        position: relative;
+        margin: 5% auto;
+        width: 700px;
+        height: 600px;
+        background: #FFF;
+        border-radius: 2px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        padding: 40px;
+        width: 300px;
+        height: 400px;
+    }
+
+    h1 {
+        margin: 0 0 20px 0;
+        font-weight: 300;
+        font-size: 28px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="number"] {
+        display: block;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        padding: 4px;
+        width: 220px;
+        height: 32px;
+        border: none;
+        border-bottom: 1px solid #AAA;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        transition: 0.2s ease;
+    }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-bottom: 2px solid #16a085;
+            color: #16a085;
+            transition: 0.2s ease;
+        }
+
+    input[type="submit"] {
+        margin-top: 28px;
+        width: 120px;
+        height: 32px;
+        background: #16a085;
+        border: none;
+        border-radius: 2px;
+        color: #FFF;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: 0.1s ease;
+        cursor: pointer;
+    }
+
+        input[type="submit"]:hover,
+        input[type="submit"]:focus {
+            opacity: 0.8;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            transition: 0.1s ease;
+        }
+
+        input[type="submit"]:active {
+            opacity: 1;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            transition: 0.1s ease;
+        }
+
+    .or {
+        position: absolute;
+        top: 180px;
+        left: 280px;
+        width: 40px;
+        height: 40px;
+        background: #DDD;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        box-sizing: border-box;
+        padding: 40px;
+        width: 300px;
+        height: 400px;
+        background: url('https://goo.gl/YbktSj');
+        background-size: cover;
+        background-position: center;
+        border-radius: 0 2px 2px 0;
+    }
+
+        .right .loginwith {
+            display: block;
+            margin-bottom: 40px;
+            font-size: 28px;
+            color: #FFF;
+            text-align: center;
+        }
+
+    button.social-signin {
+        margin-bottom: 20px;
+        width: 220px;
+        height: 36px;
+        border: none;
+        border-radius: 2px;
+        color: #FFF;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        transition: 0.2s ease;
+        cursor: pointer;
+    }
+
+        button.social-signin:hover,
+        button.social-signin:focus {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            transition: 0.2s ease;
+        }
+
+        button.social-signin:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            transition: 0.2s ease;
+        }
+
+        button.social-signin.facebook {
+            background: #32508E;
+        }
+
+        button.social-signin.twitter {
+            background: #55ACEE;
+        }
+
+        button.social-signin.google {
+            background: #DD4B39;
+        }
+</style>
+<div id="bod">
+    <div id="login-box">
+        <div class="left">
+            <h1>Sign up</h1>
+            <form method="post">
+                @if (ViewBag.NationalNumber != null)
+                {
+                    <label style="color:red">National Number already exist</label>
+                }
+                <input asp-for="FirstName" placeholder="FirstName" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <input asp-for="LastName" placeholder="LastName" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+                <input asp-for="Email" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="password" placeholder="PhoneNumber" />
+                <span asp-validation-for="password" class="text-danger"></span>
+                <input asp-for="NationalNumber" type="number" placeholder="NationalNumber" />
+                <span asp-validation-for="NationalNumber" class="text-danger"></span>
+                <input asp-for="Address" placeholder="Address" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+                <input type="submit" name="signup_submit" value="Sign me up" />
+
+            </form>
+        </div>
+
+         <div class="right">
+                    <span class="loginwith">Sign in with<br />social network</span>
+                    <form  method="post" asp-action="Login" asp-controller="Account" >
+                        <input asp-for="NationalNumber" type="number" placeholder="NationalNumber" />
+                        <span asp-validation-for="NationalNumber" class="text-danger"></span>
+                        <input asp-for="password" placeholder="Password" type="password"/>
+                        <span asp-validation-for="password" class="text-danger"></span>
+                        <input type="submit" name="signup_submit" value="Log In" />
+                    </form>
+
+                </div>
+                <div class="or" style="margin-left:40px;">OR</div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@*@model RegisterViewModel
+
+    @{
+        ViewBag.Title = "User Registration";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h1>User Registration</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" asp-action="Register" onsubmit="return jQueryAjaxPost(this);">
+                @if (ViewBag.NationalNumber != null)
+                {
+                    <label style="color:red">National Number already exist</label>
+                }
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="password" class="control-label"></label>
+                            <input asp-for="password" class="form-control" type="text" />
+                            <span asp-validation-for="password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NationalNumber"></label>
+                            <input asp-for="NationalNumber" class="form-control" />
+                            <span asp-validation-for="NationalNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Address"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 offset-md-3">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>*@

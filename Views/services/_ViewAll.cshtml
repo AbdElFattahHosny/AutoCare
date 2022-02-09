@@ -1,0 +1,70 @@
+﻿@model IEnumerable<AutoCare.Models.services>
+@inject SignInManager<ApplicationUser> SignInManager
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.priceInPoints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Earnedpoints)
+            </th>
+            @if (SignInManager.IsSignedIn(User) &&  ( User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.AddedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EditedDate)
+                </th>
+                <th>
+                    <a onclick="showInPopup('@Url.Action("Create","services",null,Context.Request.Scheme)','New Service')" class="btn btn-success text-white"><i class="fas fa-random"></i>New Service</a>
+            </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.priceInPoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Earnedpoints)
+                </td>
+                @if (SignInManager.IsSignedIn(User) &&  ( User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EditedDate)
+                    </td>
+                    <td>
+                        <div class="form-row">
+                        <button onclick="showInPopup('@Url.Action("Edit","services",new {id=item.Id},Context.Request.Scheme)','Update')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</button>
+                        <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+
+                    </div>
+                </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

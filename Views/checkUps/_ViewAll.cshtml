@@ -1,0 +1,83 @@
+﻿@model IEnumerable<AutoCare.Models.checkUp>
+@inject SignInManager<ApplicationUser> SignInManager
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Counter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCost)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPoints)
+            </th>
+            @if((SignInManager.IsSignedIn(User) &&  ( User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))))
+             {
+            <th>
+                @Html.DisplayNameFor(model => model.EditedDate)
+            </th>
+            <th>
+               <a asp-action="Create" asp-controller="checkUps" class="btn btn-success text-white"><i class="fas fa-random"></i>New check</a>
+            </th>
+             }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        { 
+                <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.car.CarNumbers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Counter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPoints)
+                </td>
+                @if ((SignInManager.IsSignedIn(User) &&  ( User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EditedDate)
+                    </td>
+                    <td>
+                        <div class="form-row">
+@*                        <button onclick="showInPopup('@Url.Action("Details","checkUps",new {id=item.Id},Context.Request.Scheme)','Details')" class="btn btn-info text-white"><i class="fas fa-anchor"></i> Details</button>
+*@                        <a asp-action="ExpandBill" asp-route-id="@item.Id" class="btn btn-outline-dark"><i class="fas fa-expand"></i>Expand</a>
+                         <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="checkUps" class="btn btn-success text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <form asp-action="Delete" asp-route-id="@item.Id" class="d-inline">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+
+                    </div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div class="form-row">
+                       <a asp-action="ExpandBill" asp-route-id="@item.Id" class="btn btn-outline-dark"><i class="fas fa-expand"></i>Expand</a>
+                      </div>
+                      </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

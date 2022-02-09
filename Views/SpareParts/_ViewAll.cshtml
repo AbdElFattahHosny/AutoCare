@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AutoCare.Models.SpareParts>
+@inject SignInManager<ApplicationUser> SignInManager
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+             @if (SignInManager.IsSignedIn(User) &&  ( User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.AddedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EditedDate)
+                </th>
+                <th>
+                    <a onclick="showInPopup('@Url.Action("Create","SpareParts",null,Context.Request.Scheme)','New SparePart')" class="btn btn-success text-white"><i class="fas fa-random"></i>New SparePart</a>
+            </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+              
+                     @if (SignInManager.IsSignedIn(User) && ( User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+                     {
+                           <td>
+                     @Html.DisplayFor(modelItem => item.AddedDate)
+                        </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EditedDate)
+                </td>
+                <td>
+                    <div class="form-row">
+                        <button onclick="showInPopup('@Url.Action("Edit","SpareParts",new {id=item.ID},Context.Request.Scheme)','Update')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</button>
+                        <form asp-action="Delete" asp-route-id="@item.ID" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+
+                    </div>
+                </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

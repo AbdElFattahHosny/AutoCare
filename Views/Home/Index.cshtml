@@ -1,0 +1,110 @@
+﻿@{
+  
+    Layout = "";
+}
+
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/et-lineicon.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css" />
+   <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,400italic,500italic,700' rel='stylesheet' type='text/css'>
+    <script src="~/js/animated.js"></script>
+ <script src="~/js/jquery.stellar.min.js"></script>
+
+    <script src="~/js/jquery.nicescroll.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,400italic,500italic,700' rel='stylesheet' type='text/css'>
+    
+    <script src="~/css/Admincss/vendor/jquery/jquery.min.js"></script>
+    <script src="~/css/Admincss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/css/Admincss/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/js/AdminJs/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/css/Admincss/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/js/AdminJs/demo/chart-area-demo.js"></script>
+    <script src="~/js/AdminJs/demo/chart-pie-demo.js"></script>
+    <!-- Custom fonts for this template-->
+    <link href="~/css/Admincss/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- Custom styles for this template-->
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/Admincss/sb-admin-2.min.css" rel="stylesheet">
+
+   
+       <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="height:30px">
+   <div class="topbar-divider d-none d-sm-block"></div>
+                       <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@User.Identity.Name</span>
+                                <img class="img-profile rounded-circle"
+                                     src="~/images/Adminimg/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown"> 
+                                   <a class="dropdown-item" asp-action="Register" asp-controller="Account">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Join Us            
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+
+<div style="background-image:url('~/wwwroot/images/pexels-pixabay-279949.jpg')">
+     <section class="features parallax" data-stellar-background-ratio="0.7" id="features" style="background-position: 0% -14.3391px, 0%;">
+            <div class="container text-center">
+                <div class="text-center">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="features-box">
+                            <a asp-action="Index" asp-controller="SpareParts">
+                            <div class="open-overlay"><i class="icon-circle-compass"></i></div>
+                            </a>
+                            <h4>Spare Parts</h4>
+                            <p>You Can Now See Spare Parts and their Prices</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="features-box">
+                            <a asp-action="Index" asp-controller="services">
+                            <div class="open-overlay"><i class="icon-ribbon"></i></div>
+                            </a>
+                            <h4>Services</h4>
+                            <p>You Can Now See our services and Maintenances prices</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="features-box">
+                              <a asp-action="Register" asp-controller="Account">
+                            <div class="open-overlay">
+                              
+                                    <i class="icon-circle-compass"></i>
+                                 </div>   </a>
+                            <h4>Join Us</h4>
+                            <p>You Can Now Join Us </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>

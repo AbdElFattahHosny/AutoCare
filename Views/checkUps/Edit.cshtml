@@ -1,0 +1,116 @@
+﻿@model AutoCare.Models.ViewModels.CheckUpSpareServicesViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="padding-left:30px;">Edit</h1>
+
+<h4 style="padding-left:30px;">checkUp</h4>
+<hr />
+<div class="row" style="padding:30px;">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@ViewBag.id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="Counter" class="control-label"></label>
+                <input asp-for="Counter" class="form-control" />
+                <span asp-validation-for="Counter" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="CarId" class="control-label"></label>
+                 <select asp-for="CarId" class="form-control" asp-items="@(new SelectList(ViewBag.cars,"ID","CarNumbers"))" style="width:200%">
+                <option selected disabled>--Choose car please--</option>
+            </select><br />
+            </div>
+            </div>
+             <div class="container">
+                <div class="row">
+                <div class="col-xs-6 table-responsive" >
+            
+        
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <th>Spare Parts</th>
+                <th>Price</th>
+                <th>Check</th>
+                <th></th>
+                </thead>
+                <tbody>
+                    @for (int i=0;i<Model.SpareParts.Count();i++)
+                      {
+                        <tr>
+                            <td>
+                               @Html.HiddenFor(x=>Model.SpareParts[i].ID)
+                               @Html.DisplayFor(it=>Model.SpareParts[i].Details)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(it=>Model.SpareParts[i].Price)
+                            </td>
+                            <td>
+                                @*<input type="checkbox" asp-for="SpareParts[i].IsChecked" id="mycheck" />*@
+                               @Html.CheckBoxFor(it=>Model.SpareParts[i].IsChecked,new {style = " Vertical-Align:3px}"})
+                            </td>
+                             <td>
+                            <input asp-for="SpareParts[i].Quantity" class="form-control" type="number" style="width:80px" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            </div>
+
+                 <div class="col-xs-6 table-responsive" >
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <th>Services</th>
+                <th>Price</th>
+                <th>priceInPoints</th>
+                <th>Earnedpoints</th>
+                <th>Check</th>
+                </thead>
+                <tbody>
+                    @for (int i=0;i<Model.Services.Count();i++) {
+                        <tr>
+                            <td>
+                               @Html.HiddenFor(x=>Model.Services[i].Id)
+                               @Html.DisplayFor(it=>Model.Services[i].Details)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(it=>Model.Services[i].price)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(it=>Model.Services[i].priceInPoints)
+                            </td>
+                            <td>
+                               @Html.DisplayFor(it=>Model.Services[i].Earnedpoints)
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(it=>Model.Services[i].IsChecked,new {style = " Vertical-Align:3px}"})
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            </div>
+             </div>
+             </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn alert-primary">Back to List</a>
+                 <a asp-action="ExpandBill" asp-route-id="@ViewBag.id" class="btn btn-danger">Final Submit</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

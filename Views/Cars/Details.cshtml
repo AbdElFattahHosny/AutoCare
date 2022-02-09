@@ -1,0 +1,48 @@
+﻿@model AutoCare.Models.Cars
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "";
+}
+
+<h1>Details</h1>
+
+<div class="row col-sm-12">
+    
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.CarNumbers)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.CarNumbers)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt class="col-sm-4">
+            <label> Owner Name</label>
+        </dt>
+        <dd class="col-sm-8">
+            <a  class="link-primary" style="font-weight:bolder;" onclick="showInPopup('@Url.Action("Details","Account",new {id=Model.OwnerId},Context.Request.Scheme)','Details')">
+                @Html.DisplayFor(model => model.applicationUser.FirstName)
+                @Html.DisplayFor(model => model.applicationUser.LastName)
+            </a>
+            @*<label hidden>@Model.OwnerId</label>*@
+
+        </dd>
+    </dl>
+</div>
+<div>
+    <button onclick="showInPopup('@Url.Action("Edit","Cars",new {id=Model.ID},Context.Request.Scheme)','Update Car')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</button>
+    <a asp-action="Index"  class="btn btn-info text-white"> Back to List --> </a>
+</div>

@@ -1,0 +1,142 @@
+﻿@model AutoCare.Models.checkUp
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "";
+    double totalprice =0;
+    
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>checkUp</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Counter)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Counter)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.TotalPoints)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.TotalPoints)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.car)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.car.CarNumbers)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.car.applicationUser.FirstName)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.car.applicationUser.FirstName)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.car.applicationUser.LastName)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.car.applicationUser.LastName)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.car.applicationUser.Phone)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.car.applicationUser.Phone)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.car.applicationUser.Address)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.car.applicationUser.Address)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.car.applicationUser.NationalNumber)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.car.applicationUser.NationalNumber)
+        </dd>
+        @if (Model.spareRelation.Count() > 0)
+        {
+            foreach (var spare in Model.spareRelation)
+            {
+                <dt class = "col-sm-6">
+                SparePart :     @Html.DisplayNameFor(model => spare.spareParts.Details)
+                </dt>
+                <dd class = "col-sm-6">
+                    @Html.DisplayFor(model => spare.spareParts.Details)
+                </dd> 
+                <dt class = "col-sm-6">
+                    @Html.DisplayNameFor(model => spare.spareParts.Price)
+                </dt>
+                <dd class = "col-sm-6">
+                    @Html.DisplayFor(model => spare.spareParts.Price)
+                </dd>
+                
+                    totalprice += spare.spareParts.Price;
+                
+            }
+        }
+         @if (Model.servicesRelation.Count() > 0)
+        {
+            foreach (var service in Model.servicesRelation)
+            {
+                <dt class = "col-sm-6">
+                  @Html.DisplayNameFor(model => service.service.Details)
+                </dt>
+                <dd class = "col-sm-6">
+                    @Html.DisplayFor(model => service.service.Details)
+                </dd> 
+                <dt class = "col-sm-6">
+                    @Html.DisplayNameFor(model => service.service.price)
+                </dt>
+                <dd class = "col-sm-6">
+                    @Html.DisplayFor(model => service.service.price)
+                </dd> 
+
+                <dt class = "col-sm-6">
+                    @Html.DisplayNameFor(model => service.service.Earnedpoints)
+                </dt>
+                <dd class = "col-sm-6">
+                    @Html.DisplayFor(model => service.service.Earnedpoints)
+                </dd>
+                 
+                     totalprice += service.service.price;
+                 
+            }
+        }
+
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.EditedDate)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.EditedDate)
+        </dd>
+         <dt class = "col-sm-6"><strong>Total Price</strong>
+             </dt>
+        <dd class = "col-sm-6">
+            @totalprice
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="ExpandBill" asp-route-id="@Model.Id"><i class="fas fa-expand"></i>Expand to Print</a>
+</div>
